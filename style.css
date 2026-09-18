@@ -1,0 +1,385 @@
+:root {
+    --dark-bg: #121212;
+    --card-bg: #1E1E1E;
+    --accent-red: #E50914;
+    --blue-color: #2563eb;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: #ffffff;
+    font-family: sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(18, 18, 18, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1f2937;
+}
+
+.header-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; /* Насны badges-ийг яг голлуулахад ашиглана */
+}
+
+/* Лого */
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: var(--blue-color);
+}
+
+.logo span {
+    color: #ffffff;
+}
+
+/* Насны ангилал (Яг голоор байрлана) */
+.age-badges {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 8px;
+}
+
+@media(min-width: 640px) {
+    .age-badges { display: flex; }
+}
+
+/* Насны ангиллын товчлуурууд (Сагсны товчтой загварыг нь ижил болгов) */
+.age-badges {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    gap: 10px;
+}
+
+@media(min-width: 640px) {
+    .age-badges { display: flex; }
+}
+
+.age-btn {
+    background-color: #1f2937;
+    color: white;
+    height: 30px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.age-btn:hover {
+    background-color: var(--blue-color);
+    transform: scale(1.05);
+}
+
+/* Баруун талын сагсны товч */
+.cart-btn {
+    background-color: #1f2937;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+}
+/* Баруун талын хэсэг (Хэл солигч + Сагс) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Хоёр товчны хоорондох зай */
+}
+
+/* Хэл солих товчны загвар */
+.lang-btn {
+    background-color: #1f2937;
+    color: white;
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang-btn:hover {
+    background-color: var(--blue-color);
+    transform: scale(1.05);
+}
+
+.cart-btn:hover {
+    background-color: var(--blue-color);
+    transform: scale(1.05);
+}
+
+/* Hero Slider */
+.hero-section {
+    position: relative;
+    height: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+@media(min-width: 768px) {
+    .hero-section { height: 800px; }
+}
+
+#slider-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, var(--dark-bg), rgba(18,18,18,0.6), transparent);
+    z-index: 10;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+}
+
+/* Slider Text & Dooshluulah heseg */
+.slider-text-wrapper {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    padding: 0 16px;
+}
+
+#slider-content {
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Текстийг доошлуулах код (Эндээс тоог нь өөрчилж болно) */
+    transform: translateY(320px); 
+}
+
+#slide-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+@media(min-width: 768px) {
+    #slide-title { font-size: 2.5rem; }
+}
+
+#slide-desc {
+    font-size: 0.875rem;
+    color: #d1d5db;
+}
+
+/* Controls */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    padding: 12px 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+}
+.slider-btn:hover { background: rgba(0, 0, 0, 0.7); }
+.slider-btn.prev { left: 16px; }
+.slider-btn.next { right: 16px; }
+
+/* Dots */
+.dots-container {
+    position: absolute;
+    bottom: 16px;
+    z-index: 20;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: opacity 0.3s, background 0.3s;
+}
+.dot.active {
+    background-color: white;
+    opacity: 1;
+}
+
+/* Movies Section */
+.movies-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 16px;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-left: 4px solid var(--accent-red);
+    padding-left: 12px;
+    margin-bottom: 32px;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media(min-width: 640px) {
+    .movie-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media(min-width: 768px) {
+    .movie-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.movie-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #1f2937;
+    transition: border-color 0.3s;
+}
+.movie-card:hover { border-color: #4b5563; }
+
+.movie-img-box {
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+}
+.movie-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.movie-card:hover .movie-img-box img {
+    transform: scale(1.05);
+}
+
+.movie-age {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: #d1d5db;
+}
+
+.movie-info {
+    padding: 20px;
+}
+
+.movie-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.movie-title-row h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.genre-tag {
+    font-size: 0.75rem;
+    color: var(--accent-red);
+    background: rgba(229, 9, 20, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.movie-duration {
+    font-size: 0.75rem;
+    color: #9ca3af;
+    margin-bottom: 16px;
+}
+
+.movie-btn {
+    display: block;
+    text-align: center;
+    background-color: #1f2937;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+.movie-btn:hover { background-color: var(--accent-red); }
+
+/* Footer */
+footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #6b7280;
+    border-top: 1px solid #1f2937;
+}
+footer p:first-child { margin-bottom: 8px; }
