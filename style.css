@@ -1,7 +1,7 @@
 :root {
     --dark-bg: #121212;
     --card-bg: #1E1E1E;
-    --accent-red: #E50914;
+    --accent-blue: #2563eb;
     --blue-color: #2563eb;
 }
 
@@ -204,7 +204,6 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* Текстийг доошлуулах код (Эндээс тоог нь өөрчилж болно) */
     transform: translateY(320px); 
 }
 
@@ -265,8 +264,9 @@ body {
 }
 
 /* Movies Section */
+/* Кино хэсгийн үндсэн контейнерийг өргөсгөх */
 .movies-section {
-    max-width: 1200px;
+    max-width: 1700px; /* Өмнө нь 1200px байсныг томруулав */
     margin: 0 auto;
     padding: 48px 16px;
 }
@@ -274,48 +274,75 @@ body {
 .section-header h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    border-left: 4px solid var(--accent-red);
+    border-left: 4px solid var(--accent-blue);
     padding-left: 12px;
     margin-bottom: 32px;
 }
 
+/* 1 эгнээнд 5 карт харуулах тохиргоо */
 .movie-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 16px; /* Картуудын хоорондох зайг багасгаж зай гаргав */
 }
 
+/* Жижиг дэлгэц */
 @media(min-width: 640px) {
     .movie-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Планшет */
 @media(min-width: 768px) {
     .movie-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* Хэвийн компьютер дээр шууд 5 багана болгох */
+@media(min-width: 1024px) {
+    .movie-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
 .movie-card {
-    background-color: var(--card-bg);
+    background-color: transparent;
+    border: none;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #1f2937;
-    transition: border-color 0.3s;
 }
-.movie-card:hover { border-color: #4b5563; }
 
+/* Зургийн контейнер */
 .movie-img-box {
-    height: 320px;
+    height: 340px;
     position: relative;
     overflow: hidden;
+    border-radius: 12px;
 }
+
 .movie-img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s;
+    transition: transform 0.5s ease;
 }
+
 .movie-card:hover .movie-img-box img {
     transform: scale(1.05);
 }
 
+/* Зүүн дээд буланд байрлах төрөл */
+.movie-genre {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--accent-red);
+    z-index: 2;
+}
+
+/* Баруун дээд буланд байрлах насны ангилал */
 .movie-age {
     position: absolute;
     top: 12px;
@@ -323,54 +350,59 @@ body {
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
     font-size: 0.75rem;
+    font-weight: 600;
     padding: 4px 10px;
     border-radius: 6px;
     color: #d1d5db;
+    z-index: 2;
 }
 
-.movie-info {
-    padding: 20px;
-}
-
-.movie-title-row {
+/* Зураг дээр шууд байрлах нэр болон товчны хэсэг */
+.movie-overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    /* Доод хэсэгтээ бараан градиент өгч текст тод харагдуулна */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.6), transparent);
+    z-index: 2;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.movie-title-row h3 {
-    font-size: 1.125rem;
+.movie-title {
+    font-size: 1rem;
     font-weight: 700;
-}
-
-.genre-tag {
-    font-size: 0.75rem;
-    color: var(--accent-red);
-    background: rgba(229, 9, 20, 0.1);
-    padding: 2px 8px;
-    border-radius: 4px;
-}
-
-.movie-duration {
-    font-size: 0.75rem;
-    color: #9ca3af;
-    margin-bottom: 16px;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .movie-btn {
     display: block;
     text-align: center;
-    background-color: #1f2937;
-    color: white;
+    background-color: transparent; /* Анх фоны өнгөгүй байх */
+    color: #ffffff; /* Текст нь цагаанаар харагдана */
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 600;
     padding: 10px;
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Нимгэн цагаан хүрээ */
     text-decoration: none;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: none;
 }
-.movie-btn:hover { background-color: var(--accent-red); }
+
+/* Хулгана хүргэх / дарах үед өнгө орж тодрох */
+.movie-btn:hover {
+    background-color: var(--accent-red); /* Улаан өнгөөр дүүрнэ */
+    border-color: var(--accent-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(37, 99, 235);
+}
 
 /* Footer */
 footer {
